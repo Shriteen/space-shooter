@@ -10,8 +10,8 @@ using namespace std;
 class sprite
 {
 	protected:
-		float x_pos;									//position x-coordinate
-		float y_pos;									//position y-coordinate
+		float x_pos;								//position x-coordinate
+		float y_pos;								//position y-coordinate
 		map< pair<int,int> , char > pixels;			//map which represents pixels as characters as value and
 													//keys are pairs of coordinates relative to position in (y,x) form
 		WINDOW *win;								//window in which sprite is drawn

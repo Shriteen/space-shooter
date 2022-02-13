@@ -2,6 +2,7 @@
 
 void movable::move()
 {
+	//clear the sprite, change position by speed and draw at new position
 	this->clean();
 	this->x_pos+=x_speed;
 	this->y_pos+=y_speed;
