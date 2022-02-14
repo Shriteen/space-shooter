@@ -28,7 +28,7 @@ void sprite::clean()
 	}	
 }
 
-bool sprite::touches(sprite &other)
+bool sprite::touches(sprite other)
 {
 	//iterate over both maps and return true if any computed positions are same
 	for(map< pair<int,int> , char >::iterator itr1=this->pixels.begin();
