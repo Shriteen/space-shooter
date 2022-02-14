@@ -8,10 +8,10 @@ void sprite::draw()
 		ptr++)
 	{
 		mvwaddch(win,
-				 y_pos + ptr->first.first,
-				 x_pos + ptr->first.second,
+				 int(y_pos + ptr->first.first),
+				 int(x_pos + ptr->first.second),
 				 ptr->second );
-	}	
+	}
 }
 
 void sprite::clean()
