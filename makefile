@@ -25,6 +25,9 @@ bullet.h: movable.h
 health_pack.h: movable.h
 	touch health_pack.h
 
+environment.o: environment.cpp ship.h asteroid.h bullet.h health_pack.h
+	g++ environment.cpp -c
+
 ship.o: ship.cpp ship.h environment.h
 	g++ ship.cpp -c
 
@@ -36,6 +39,13 @@ bullet.o: bullet.cpp bullet.h environment.h
 
 health_pack.o: health_pack.cpp health_pack.h environment.h
 	g++ health_pack.cpp -c
+
+gameplay.h: environment.h
+	touch gameplay.h
+
+gameplay.o: gameplay.cpp gameplay.h
+	g++ gameplay.cpp -c
+
 
 clean:
 	rm *.o
