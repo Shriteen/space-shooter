@@ -19,7 +19,7 @@ class sprite
 		virtual void draw();						//draw the sprite in the virtual window (Not visible until refresh is called)
 		void clean();								//fills the position with spaces effectively erasing the sprite
 		bool touches(sprite other);				//Return true if touching other sprite
-		
+		~sprite();
 };
 
 #endif

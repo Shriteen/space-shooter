@@ -49,6 +49,11 @@ bool sprite::touches(sprite other)
 	return 0;
 }
 
+sprite::~sprite()
+{
+	this->clean();
+}
+
 /*class test:public sprite
 {
 	public:
