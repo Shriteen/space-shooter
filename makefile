@@ -1,5 +1,6 @@
-all:
-	echo "ToDo"
+#temoprary
+all: sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o
+	g++ sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o -lncurses -o test
 
 sprite.o: sprite.cpp sprite.h
 	g++ sprite.cpp -c
@@ -10,7 +11,7 @@ movable.o: movable.cpp movable.h
 movable.h: sprite.h
 	touch movable.h
 
-environment.h: ship.h asteroid.h bullet.h health_pack.h
+environment.h: ship.h asteroid.h bullet.h health_pack.h gameplay.h
 	touch environment.h
 
 ship.h: movable.h
@@ -25,7 +26,7 @@ bullet.h: movable.h
 health_pack.h: movable.h
 	touch health_pack.h
 
-environment.o: environment.cpp ship.h asteroid.h bullet.h health_pack.h
+environment.o: environment.cpp ship.h asteroid.h bullet.h health_pack.h gameplay.h
 	g++ environment.cpp -c
 
 ship.o: ship.cpp ship.h environment.h
@@ -40,10 +41,10 @@ bullet.o: bullet.cpp bullet.h environment.h
 health_pack.o: health_pack.cpp health_pack.h environment.h
 	g++ health_pack.cpp -c
 
-gameplay.h: environment.h
-	touch gameplay.h
+#gameplay.h: environment.h
+#	touch gameplay.h
 
-gameplay.o: gameplay.cpp gameplay.h
+gameplay.o: gameplay.cpp gameplay.h environment.h
 	g++ gameplay.cpp -c
 
 
