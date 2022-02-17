@@ -19,8 +19,8 @@ class asteroid:public movable
 		void set_rand_pos_speed();										//Set initial random position and speed/direction
 	public:
 		asteroid(WINDOW *win);
-		
-		//bool interact();
+		bool interact();												//Interact with all other entities, 
+																		//returns true if survived, false if destroyed
 };
 
 #endif

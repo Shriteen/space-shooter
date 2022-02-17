@@ -122,3 +122,49 @@ asteroid::asteroid(WINDOW *win)
 	random_shape();
 	set_rand_pos_speed();
 }
+
+bool asteroid::interact()
+{
+	if(movable::interact() == 0)										//check for map bounds
+		return 0;
+	
+	if(this->sprite::touches(*player))
+		return 0;
+	
+	for(set<enemy_ship*>::iterator itr=enemies.begin();
+		itr!=enemies.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			return 0;
+	}
+	
+	//if the asteroid is not present in the set, then end iterator is returned
+	//execute only if not present
+	if(asteroid_collisions.find(this->id) == asteroid_collisions.end())				
+	{
+		//check with all asteroids
+		for(set<asteroid*>::iterator itr=asteroids.begin();
+			itr!=asteroids.end();
+			itr++ )
+		{
+			//ignore if iterator is pointing to the same asteroid
+			if((this->id != (*itr)->id) &&
+				this->touches(**itr) )
+			{
+				//swap the x_speed and y_speed
+				float temp = (*itr)->x_speed;
+				(*itr)->x_speed = this->x_speed;
+				this->x_speed = temp;
+				
+				temp = (*itr)->y_speed;
+				(*itr)->y_speed = this->y_speed;
+				this->y_speed = temp;
+				
+				//insert other asteroid id in the set
+				asteroid_collisions.insert((*itr)->id);
+			}
+		}
+	}
+	return 1;
+}
