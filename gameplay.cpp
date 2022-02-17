@@ -33,7 +33,9 @@ gameplay::gameplay()
 	{
 		
 		move_env();
-		interact_env();
+		if (interact_env()==0)
+			break;
+		balance_env();
 		canvas_draw();
 		
 		wrefresh(this->win);
@@ -45,7 +47,7 @@ gameplay::gameplay()
 
 gameplay::~gameplay()
 {
-	delete player;
+	delete player;		
 	
 	/* co iterators are used as removing from set using an iterator 
 	 * invalidates all iterators to the deleted element 
@@ -184,9 +186,11 @@ gameplay::state gameplay::input()
 
 bool gameplay::interact_env()
 {
-	if(!player->interact())													//if game over
+	if(!player->interact())									//if game over
 	{
 		delete player;
+		player=NULL;										//set to NULL so that delete in gameplay destructor does not try to 
+															//free the dangling pointer 
 		return 0;
 	}
 	
@@ -243,6 +247,39 @@ bool gameplay::interact_env()
 	return 1;
 }
 
+void gameplay::balance_env()
+{
+	if(asteroids.size() < TARGET_ASTEROID_COUNT)
+	{
+		for(int i=asteroids.size();
+			i<TARGET_ASTEROID_COUNT;
+			i++ )
+		{
+			asteroid *temp= new asteroid(this->win);
+			asteroids.insert(temp);
+		}
+	}
+	
+	if(enemies.size() < TARGET_ENEMY_COUNT)
+	{
+		for(int i=enemies.size();
+			i<TARGET_ENEMY_COUNT;
+			i++ )
+		{
+			enemy_ship *temp= new enemy_ship(this->win,this->get_level());
+			enemies.insert(temp);
+		}
+	}
+	
+	static std::uniform_int_distribution five_percent(0,19);			//0.05 probability for each outcome
+	int chance=five_percent(rand_engine);
+	if(chance == 10)													//0.05 percent probability of truth
+	{
+		health_pack *temp= new health_pack(this->win);
+		hpacks.insert(temp);
+	}
+}
+
 
 /*
 int main()
@@ -252,5 +289,5 @@ int main()
 	gameplay g;
 	endwin();
 }
-
 */
+

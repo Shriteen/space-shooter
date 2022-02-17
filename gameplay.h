@@ -20,6 +20,7 @@ class gameplay
 		state input();												//Take input from user and process it, returns state of game
 		bool interact_env();										//Make all entities interact with environment, 
 																	//return 1 if player survives, 0 if game over
+		void balance_env();											//spawn asteroids, enemies and health packs
 	public:
 		gameplay();													//spawn player ship, asteroids and enemy ships, set score to 0
 		~gameplay();												//frees memory of all entities in game
