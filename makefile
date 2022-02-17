@@ -5,7 +5,7 @@ all: sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o g
 sprite.o: sprite.cpp sprite.h
 	g++ sprite.cpp -c
 
-movable.o: movable.cpp movable.h
+movable.o: movable.cpp movable.h environment.h
 	g++ movable.cpp -c
 
 movable.h: sprite.h
