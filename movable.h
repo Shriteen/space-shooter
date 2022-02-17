@@ -12,6 +12,8 @@ class movable:public sprite
 		float y_speed;						//y-axis speed
 	public:
 		virtual void move();				//change position by speed
+		bool interact();			//checks if going outside map limits,
+											//returns true if survived, false if destroyed
 };
 	
 	

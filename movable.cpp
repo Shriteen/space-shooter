@@ -1,4 +1,6 @@
 #include "movable.h"
+#include "environment.h"
+using namespace environment;
 
 void movable::move()
 {
@@ -9,45 +11,18 @@ void movable::move()
 	this->draw();
 }
 
-
-
-/*class test:public movable
+bool movable::interact()
 {
-	public:
-		test(WINDOW *win,float y,float x,float vy,float vx)
-		{
-			this->win=win;
-			this->y_pos=y;
-			this->x_pos=x;
-			this->y_speed=vy;
-			this->x_speed=vx;
-			
-			pixels[pair<int,int>{0,0}]='#';
-			pixels[pair<int,int>{-1,0}]='+';
-			pixels[pair<int,int>{0,-1}]='(';
-			pixels[pair<int,int>{0,1}]=')';
-			pixels[pair<int,int>{1,0}]='+';
-			
-		}
-};
-
-
-
-int main()
-{
-	initscr();
-	
-	test t(stdscr,10,35,1.5,0.5);
-	
-	for(int i=0;i<10;i++)
+	//if going out of bounds
+	if( this->y_pos < top_side-15    ||
+		this->y_pos > bottom_side+15 ||
+		this->x_pos < -5             || 
+		this->x_pos > right_side+30)
 	{
-		t.move();
-		refresh();
-		getch();		
+		return 0;
 	}
-	
-	
-	endwin();
-	
+	else
+	{
+		return 1;
+	}
 }
-*/
