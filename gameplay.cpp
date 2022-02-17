@@ -2,8 +2,6 @@
 #include "environment.h"
 using namespace environment;
 
-#include<iostream>
-
 gameplay::gameplay()
 {
 	//-------------
@@ -35,13 +33,12 @@ gameplay::gameplay()
 	{
 		
 		move_env();
-		
-		
+		interact_env();
 		canvas_draw();
 		
 		wrefresh(this->win);
-	}	
-	*/
+	}	*/
+	
 	
 	//---------------------------------temporary
 }
@@ -185,11 +182,75 @@ gameplay::state gameplay::input()
 	return state_var;
 }
 
-/*int main()
+bool gameplay::interact_env()
+{
+	if(!player->interact())													//if game over
+	{
+		delete player;
+		return 0;
+	}
+	
+	//If entities are destroyed delete and remove them
+	for(set<enemy_ship*>::iterator itr=enemies.begin();
+		itr!=enemies.end(); )
+	{
+		set<enemy_ship*>::iterator co_itr=itr;
+		itr++;
+		if(!(*co_itr)->interact())
+		{
+			delete *co_itr;
+			enemies.erase(co_itr);
+		}
+	}
+	
+	asteroid_collisions.clear();										//flush collisions set
+	for(set<asteroid*>::iterator itr=asteroids.begin();
+		itr!=asteroids.end(); )
+	{
+		set<asteroid*>::iterator co_itr=itr;
+		itr++;
+		if(!(*co_itr)->interact())
+		{
+			delete *co_itr;
+			asteroids.erase(co_itr);
+		}
+	}
+	
+	for(set<bullet*>::iterator itr=bullets.begin();
+		itr!=bullets.end(); )
+	{
+		set<bullet*>::iterator co_itr=itr;
+		itr++;
+		if(!(*co_itr)->interact())
+		{
+			delete *co_itr;
+			bullets.erase(co_itr);
+		}
+	}
+	
+	for(set<health_pack*>::iterator itr=hpacks.begin();
+		itr!=hpacks.end(); )
+	{
+		set<health_pack*>::iterator co_itr=itr;
+		itr++;
+		if(!(*co_itr)->interact())
+		{
+			delete *co_itr;
+			hpacks.erase(co_itr);
+		}
+	}
+	
+	return 1;
+}
+
+
+/*
+int main()
 {
 	initscr();
 	keypad(stdscr,TRUE);
 	gameplay g;
 	endwin();
 }
+
 */

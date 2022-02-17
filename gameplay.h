@@ -18,6 +18,8 @@ class gameplay
 		void canvas_draw();											//Draw all entities including player ship
 		int get_level();											//Determine level based on score
 		state input();												//Take input from user and process it, returns state of game
+		bool interact_env();										//Make all entities interact with environment, 
+																	//return 1 if player survives, 0 if game over
 	public:
 		gameplay();													//spawn player ship, asteroids and enemy ships, set score to 0
 		~gameplay();												//frees memory of all entities in game
