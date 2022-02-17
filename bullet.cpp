@@ -43,3 +43,12 @@ bool bullet::interact()
 	
 	return 1;
 }
+
+void bullet::draw()
+{
+	attron(COLOR_PAIR(2));
+	attron(A_BOLD);
+	sprite::draw();
+	attroff(A_BOLD);
+	attroff(COLOR_PAIR(2));
+}

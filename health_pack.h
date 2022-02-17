@@ -9,6 +9,7 @@ class health_pack:public movable
 		health_pack(WINDOW *win);
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
+		void draw();													//set powerup color to green
 };
 
 #endif

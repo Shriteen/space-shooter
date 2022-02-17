@@ -33,7 +33,7 @@ class player_ship:public ship
 		void move(int key);												//accepts key strokes and perform move by player
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
-		//void draw();
+		void draw();													//set player ship color to green
 };
 
 
@@ -48,7 +48,7 @@ class enemy_ship:public ship
 		void move();													//perform random move by enemies
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
-		//void draw();
+		void draw();													//set player ship color to red
 };
 
 #endif

@@ -21,6 +21,7 @@ class asteroid:public movable
 		asteroid(WINDOW *win);
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
+		void draw();													//inverted color drawing
 };
 
 #endif

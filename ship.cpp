@@ -152,6 +152,14 @@ bool player_ship::interact()
 		return 1;
 }
 
+void player_ship::draw()
+{
+	attron(COLOR_PAIR(1));
+	attron(A_BOLD);
+	sprite::draw();
+	attroff(A_BOLD);
+	attroff(COLOR_PAIR(1));
+}
 
 enemy_ship::enemy_ship(WINDOW *win,int level)
 {
@@ -257,4 +265,13 @@ bool enemy_ship::interact()
 		return 0;
 	else
 		return 1;
+}
+
+void enemy_ship::draw()
+{
+	attron(COLOR_PAIR(3));
+	attron(A_BOLD);
+	sprite::draw();
+	attroff(A_BOLD);
+	attroff(COLOR_PAIR(3));
 }

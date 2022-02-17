@@ -168,3 +168,10 @@ bool asteroid::interact()
 	}
 	return 1;
 }
+
+void asteroid::draw()
+{
+	attron(A_REVERSE);
+	sprite::draw();
+	attroff(A_REVERSE);
+}

@@ -26,3 +26,12 @@ bool health_pack::interact()
 	
 	return 1;
 }
+
+void health_pack::draw()
+{
+	attron(COLOR_PAIR(1));
+	attron(A_BOLD);
+	sprite::draw();
+	attroff(A_BOLD);
+	attroff(COLOR_PAIR(1));
+}
