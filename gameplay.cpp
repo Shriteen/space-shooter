@@ -2,33 +2,34 @@
 #include "environment.h"
 using namespace environment;
 
-gameplay::gameplay()
+gameplay::gameplay(WINDOW *win)
 {
-	//-------------
-	this->win=stdscr;
+	//set canvas window
+	this->win=win;
+	canvas=this->win;
 	
 	this->score=0;
 	//spawn player ship
-	player=new player_ship(this->win);
+	player=new player_ship();
 	//spawn asteroids and add to set
 	for(int i=0; i<TARGET_ASTEROID_COUNT; i++)
 	{
-		asteroid *temp= new asteroid(this->win);
+		asteroid *temp= new asteroid();
 		asteroids.insert(temp);
 	}
 	//spawn enemy ships and add to set
 	for(int i=0; i<TARGET_ENEMY_COUNT; i++)
 	{
-		enemy_ship *temp= new enemy_ship(this->win,this->get_level());
+		enemy_ship *temp= new enemy_ship(this->get_level());
 		enemies.insert(temp);
 	}
 	
 	
 	
 	
-	
-	
-	/*state_var=playing;
+	/*
+
+	state_var=playing;
 	while(input()==playing)
 	{
 		
@@ -39,8 +40,8 @@ gameplay::gameplay()
 		canvas_draw();
 		
 		wrefresh(this->win);
-	}	*/
-	
+	}	
+	*/
 	
 	//---------------------------------temporary
 }
@@ -255,7 +256,7 @@ void gameplay::balance_env()
 			i<TARGET_ASTEROID_COUNT;
 			i++ )
 		{
-			asteroid *temp= new asteroid(this->win);
+			asteroid *temp= new asteroid();
 			asteroids.insert(temp);
 		}
 	}
@@ -266,7 +267,7 @@ void gameplay::balance_env()
 			i<TARGET_ENEMY_COUNT;
 			i++ )
 		{
-			enemy_ship *temp= new enemy_ship(this->win,this->get_level());
+			enemy_ship *temp= new enemy_ship(this->get_level());
 			enemies.insert(temp);
 		}
 	}
@@ -275,19 +276,23 @@ void gameplay::balance_env()
 	int chance=five_percent(rand_engine);
 	if(chance == 10)													//0.05 percent probability of truth
 	{
-		health_pack *temp= new health_pack(this->win);
+		health_pack *temp= new health_pack();
 		hpacks.insert(temp);
 	}
 }
 
 
-/*
+
 int main()
 {
 	initscr();
+	noecho();
+	start_color();
+	init_pair(1,COLOR_GREEN,COLOR_BLACK);
+	init_pair(2,COLOR_YELLOW,COLOR_BLACK);
+	init_pair(3,COLOR_RED,COLOR_BLACK);
 	keypad(stdscr,TRUE);
-	gameplay g;
+	gameplay g(stdscr);
 	endwin();
 }
-*/
 

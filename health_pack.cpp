@@ -2,9 +2,9 @@
 #include "environment.h"
 using namespace environment;
 
-health_pack::health_pack(WINDOW *win)
+health_pack::health_pack()
 {
-	this->win=win;
+	this->win=canvas;
 	this->y_pos=rand_int_y(rand_engine);
 	this->x_pos=right_side;
 	
@@ -29,9 +29,9 @@ bool health_pack::interact()
 
 void health_pack::draw()
 {
-	attron(COLOR_PAIR(1));
-	attron(A_BOLD);
+	wattron(this->win,COLOR_PAIR(1));
+	wattron(this->win,A_BOLD);
 	sprite::draw();
-	attroff(A_BOLD);
-	attroff(COLOR_PAIR(1));
+	wattroff(this->win,A_BOLD);
+	wattroff(this->win,COLOR_PAIR(1));
 }

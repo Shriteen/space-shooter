@@ -5,7 +5,7 @@ using namespace environment;
 void ship::shoot()
 {
 	int dir=(gun.second > 0)?1:-1;										//determine if gun position is on right or left and spawn bullet
-	bullet *temp= new bullet(win,y_pos+gun.first,x_pos+gun.second,dir);
+	bullet *temp= new bullet(y_pos+gun.first,x_pos+gun.second,dir);
 	bullets.insert(temp);
 	this->clean();
 	this->x_pos-=dir;													//equal and opposite reaction
@@ -25,9 +25,9 @@ void ship::move(action act)
 }
 
 
-player_ship::player_ship(WINDOW *win)
+player_ship::player_ship()
 {
-	this->win=win;
+	this->win=canvas;
 	this->y_pos=(LINES/2);
 	this->x_pos=(COLS*0.1);
 	this->y_speed=0;
@@ -154,16 +154,16 @@ bool player_ship::interact()
 
 void player_ship::draw()
 {
-	attron(COLOR_PAIR(1));
-	attron(A_BOLD);
+	wattron(this->win,COLOR_PAIR(1));
+	wattron(this->win,A_BOLD);
 	sprite::draw();
-	attroff(A_BOLD);
-	attroff(COLOR_PAIR(1));
+	wattroff(this->win,A_BOLD);
+	wattroff(this->win,COLOR_PAIR(1));
 }
 
-enemy_ship::enemy_ship(WINDOW *win,int level)
+enemy_ship::enemy_ship(int level)
 {
-	this->win=win;
+	this->win=canvas;
 	
 	//set positions and speed
 	this->y_pos=rand_int_y(rand_engine);
@@ -269,9 +269,9 @@ bool enemy_ship::interact()
 
 void enemy_ship::draw()
 {
-	attron(COLOR_PAIR(3));
-	attron(A_BOLD);
+	wattron(this->win,COLOR_PAIR(3));
+	wattron(this->win,A_BOLD);
 	sprite::draw();
-	attroff(A_BOLD);
-	attroff(COLOR_PAIR(3));
+	wattroff(this->win,A_BOLD);
+	wattroff(this->win,COLOR_PAIR(3));
 }

@@ -2,9 +2,9 @@
 #include "environment.h"
 using namespace environment;
 
-bullet::bullet(WINDOW *win,float y_pos,float x_pos,int dir)
+bullet::bullet(float y_pos,float x_pos,int dir)
 {
-	this->win=win;
+	this->win=canvas;
 	this->y_pos=y_pos;
 	this->x_pos=x_pos;
 	
@@ -46,9 +46,9 @@ bool bullet::interact()
 
 void bullet::draw()
 {
-	attron(COLOR_PAIR(2));
-	attron(A_BOLD);
+	wattron(this->win,COLOR_PAIR(2));
+	wattron(this->win,A_BOLD);
 	sprite::draw();
-	attroff(A_BOLD);
-	attroff(COLOR_PAIR(2));
+	wattroff(this->win,A_BOLD);
+	wattroff(this->win,COLOR_PAIR(2));
 }

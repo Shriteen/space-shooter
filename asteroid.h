@@ -18,7 +18,7 @@ class asteroid:public movable
 				  map< pair<int,int> , char >::iterator p2);			
 		void set_rand_pos_speed();										//Set initial random position and speed/direction
 	public:
-		asteroid(WINDOW *win);
+		asteroid();
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
 		void draw();													//inverted color drawing

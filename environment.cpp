@@ -35,5 +35,8 @@ namespace environment
 	//maintain the id's of asteroid which collided during a tick 
 	//so that it is not considered again
 	set<int> asteroid_collisions; 
+	
+	//the canvas window on which to draw game
+	WINDOW *canvas;
 }
 

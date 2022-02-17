@@ -25,7 +25,7 @@ class player_ship:public ship
 		
 		int ammo;														//amount of ammunition available
 	public:
-		player_ship(WINDOW *win);
+		player_ship();
 		void pick_ammo();												//increases ammunition by PICKED_AMMO_AMOUNT
 		int get_health();												//returns value of health
 		int get_x_speed();												//returns value of x_speed
@@ -44,7 +44,7 @@ class enemy_ship:public ship
 		static const int HEALTH_INCREMENT_PER_LEVEL=10;					//for each increase in level,
 																		//initial health of enemies increases by this amount
 	public:
-		enemy_ship(WINDOW *win,int level);								//accepts current level for determining health of new enemy ships
+		enemy_ship(int level);											//accepts current level for determining health of new enemy ships
 		void move();													//perform random move by enemies
 		bool interact();												//Interact with all other entities, 
 																		//returns true if survived, false if destroyed

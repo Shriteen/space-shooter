@@ -114,9 +114,9 @@ void asteroid::set_rand_pos_speed()
 	}
 }
 
-asteroid::asteroid(WINDOW *win)
+asteroid::asteroid()
 {
-	this->win=win;
+	this->win=canvas;
 	this->id=asteroid_number;
 	asteroid_number++;
 	random_shape();
@@ -171,7 +171,7 @@ bool asteroid::interact()
 
 void asteroid::draw()
 {
-	attron(A_REVERSE);
+	wattron(this->win,A_REVERSE);
 	sprite::draw();
-	attroff(A_REVERSE);
+	wattroff(this->win,A_REVERSE);
 }
