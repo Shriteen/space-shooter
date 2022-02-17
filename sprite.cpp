@@ -39,8 +39,8 @@ bool sprite::touches(sprite other)
 			itr2!=other.pixels.end();
 			itr2++)
 		{
-			if( (this->y_pos + itr1->first.first) == (other.y_pos + itr2->first.first) &&
-			    (this->x_pos + itr1->first.second) == (other.x_pos + itr2->first.second) )
+			if( int(this->y_pos + itr1->first.first) == int(other.y_pos + itr2->first.first) &&
+			    int(this->x_pos + itr1->first.second) == int(other.x_pos + itr2->first.second) )
 			{
 				return 1;
 			}
