@@ -16,3 +16,30 @@ bullet::bullet(WINDOW *win,float y_pos,float x_pos,int dir)
 	else
 		this->x_speed=BULLET_SPEED;
 }
+
+bool bullet::interact()
+{
+	if(movable::interact() == 0)										//check for map bounds
+		return 0;
+	
+	if(this->sprite::touches(*player))
+		return 0;
+		
+	for(set<enemy_ship*>::iterator itr=enemies.begin();
+		itr!=enemies.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			return 0;
+	}
+	
+	for(set<asteroid*>::iterator itr=asteroids.begin();
+		itr!=asteroids.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			return 0;
+	}
+	
+	return 1;
+}

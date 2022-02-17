@@ -15,3 +15,14 @@ health_pack::health_pack(WINDOW *win)
 	this->y_speed=0;
 	this->x_speed=-1.2;
 }
+
+bool health_pack::interact()
+{
+	if(movable::interact() == 0)										//check for map bounds
+		return 0;
+	
+	if(this->sprite::touches(*player))
+		return 0;
+	
+	return 1;
+}

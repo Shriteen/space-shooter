@@ -7,7 +7,8 @@ class health_pack:public movable
 {
 	public:
 		health_pack(WINDOW *win);
-		//bool interact();
+		bool interact();												//Interact with all other entities, 
+																		//returns true if survived, false if destroyed
 };
 
 #endif

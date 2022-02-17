@@ -105,6 +105,53 @@ void player_ship::move(int key)
 	ship::move(_move);
 }
 
+bool player_ship::interact()
+{
+	if(movable::interact() == 0)										//check for map bounds
+		return 0;
+	
+	for(set<enemy_ship*>::iterator itr=enemies.begin();
+		itr!=enemies.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			this->health-=50;
+	}
+	
+	for(set<asteroid*>::iterator itr=asteroids.begin();
+		itr!=asteroids.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			this->health-=50;
+	}
+	
+	for(set<bullet*>::iterator itr=bullets.begin();
+		itr!=bullets.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			this->health-=20;
+	}
+	
+	for(set<health_pack*>::iterator itr=hpacks.begin();
+		itr!=hpacks.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+		{
+			this->health+=50;
+			if(this->health > MAX_HEALTH)
+				this->health=MAX_HEALTH;
+		}
+	}
+	
+	if(this->health <= 0)
+		return 0;
+	else
+		return 1;
+}
+
 
 enemy_ship::enemy_ship(WINDOW *win,int level)
 {
@@ -176,4 +223,38 @@ void enemy_ship::move()
 			ship::move(_move);
 			break;
 	}
+}
+
+bool enemy_ship::interact()
+{
+	if(movable::interact() == 0)										//check for map bounds
+		return 0;
+	
+	if(this->sprite::touches(*player))
+		this->health-=50;
+	
+	for(set<asteroid*>::iterator itr=asteroids.begin();
+		itr!=asteroids.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+			this->health-=50;
+	}
+	
+	for(set<bullet*>::iterator itr=bullets.begin();
+		itr!=bullets.end();
+		itr++)
+	{
+		if(this->sprite::touches(**itr))
+		{
+			this->health-=20;
+			if(this->health <= 0)
+				player->pick_ammo();
+		}
+	}
+	
+	if(this->health <= 0)
+		return 0;
+	else
+		return 1;
 }

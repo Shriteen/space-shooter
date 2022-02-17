@@ -11,7 +11,6 @@ class ship:public movable
 		int health;
 		pair<int,int> gun;												//position of gun relative to ship position
 	public:
-		//bool interact();
 		virtual void move(action act);									//accepts action _shoot or _move and perform the action
 		void shoot();
 
@@ -32,7 +31,8 @@ class player_ship:public ship
 		int get_x_speed();												//returns value of x_speed
 		int get_ammo_quantity();										//returns value of ammo
 		void move(int key);												//accepts key strokes and perform move by player
-		//bool interact();
+		bool interact();												//Interact with all other entities, 
+																		//returns true if survived, false if destroyed
 		//void draw();
 };
 
@@ -46,7 +46,8 @@ class enemy_ship:public ship
 	public:
 		enemy_ship(WINDOW *win,int level);								//accepts current level for determining health of new enemy ships
 		void move();													//perform random move by enemies
-		//bool interact();
+		bool interact();												//Interact with all other entities, 
+																		//returns true if survived, false if destroyed
 		//void draw();
 };
 
