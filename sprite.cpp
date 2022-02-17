@@ -54,39 +54,3 @@ sprite::~sprite()
 	this->clean();
 }
 
-/*class test:public sprite
-{
-	public:
-		test(WINDOW *win,int y,int x)
-		{
-			this->win=win;
-			this->y_pos=y;
-			this->x_pos=x;
-			
-			pixels[pair<int,int>{0,0}]='#';
-			pixels[pair<int,int>{-1,0}]='+';
-			pixels[pair<int,int>{0,-1}]='(';
-			pixels[pair<int,int>{0,1}]=')';
-			pixels[pair<int,int>{1,0}]='+';
-			
-		}
-};
-
-
-
-int main()
-{
-	initscr();
-	
-	test t(stdscr,10,35);
-	t.draw();
-	
-	test s(stdscr,11,36);
-	s.draw();
-	refresh();
-	getch();		
-	
-	endwin();
-	
-}
-*/
