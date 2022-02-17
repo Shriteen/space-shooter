@@ -12,10 +12,12 @@ class gameplay
 		
 		state state_var;											//variable to store state of game as paused or not
 		int score;
-		WINDOW *win;
+		WINDOW *win;												//window in which game canvas is drawn
+		WINDOW *HUD;												//window in which HUD is drawn
 		
 		void move_env();											//Make all entities except player ship to move
 		void canvas_draw();											//Draw all entities including player ship
+		void HUD_draw();											//Draw HUD
 		int get_level();											//Determine level based on score
 		state input();												//Take input from user and process it, returns state of game
 		bool interact_env();										//Make all entities interact with environment, 

@@ -8,6 +8,9 @@ gameplay::gameplay(WINDOW *win)
 	this->win=win;
 	canvas=this->win;
 	
+	//set HUD window
+	this->HUD=newwin(3,COLS,0,0);
+	
 	this->score=0;
 	//spawn player ship
 	player=new player_ship();
@@ -27,8 +30,8 @@ gameplay::gameplay(WINDOW *win)
 	
 	
 	
-	/*
-
+	
+/*
 	state_var=playing;
 	while(input()==playing)
 	{
@@ -38,7 +41,7 @@ gameplay::gameplay(WINDOW *win)
 			break;
 		balance_env();
 		canvas_draw();
-		
+		HUD_draw();
 		wrefresh(this->win);
 	}	
 	*/
@@ -88,6 +91,8 @@ gameplay::~gameplay()
 		delete *co_itr;
 		hpacks.erase(co_itr);
 	}
+	
+	delwin(this->HUD);
 }
 
 void gameplay::canvas_draw()
@@ -121,6 +126,20 @@ void gameplay::canvas_draw()
 	{
 		(*itr)->draw();
 	}
+	
+	wrefresh(this->win);
+}
+
+void gameplay::HUD_draw()
+{
+	wclear(this->HUD);
+	box(this->HUD,0,0);
+	//draw health,ammo,speed and score
+	mvwprintw(this->HUD,1,1,"Health:%d",player->get_health());
+	mvwprintw(this->HUD,1,int(COLS*0.5),"Ammo:%d",player->get_ammo_quantity());
+	mvwprintw(this->HUD,1,int(COLS*0.25),"Speed:%d",player->get_x_speed());
+	mvwprintw(this->HUD,1,int(COLS*0.75),"Score:%d",this->score);
+	wrefresh(this->HUD);
 }
 
 int gameplay::get_level()
@@ -282,7 +301,7 @@ void gameplay::balance_env()
 }
 
 
-
+/*
 int main()
 {
 	initscr();
@@ -295,4 +314,4 @@ int main()
 	gameplay g(stdscr);
 	endwin();
 }
-
+*/
