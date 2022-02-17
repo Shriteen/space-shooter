@@ -33,6 +33,9 @@ namespace environment
 	//pointer to player ship
 	extern player_ship* player;
 	
+	//maintain the id's of asteroid which collided during a tick 
+	//so that it is not considered again
+	extern set<int> asteroid_collisions; 
 }
 
 #endif

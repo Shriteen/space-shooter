@@ -31,5 +31,9 @@ namespace environment
 	set<health_pack*> hpacks;
 	//pointer to player ship
 	player_ship* player;
+	
+	//maintain the id's of asteroid which collided during a tick 
+	//so that it is not considered again
+	set<int> asteroid_collisions; 
 }
 
