@@ -1,3 +1,6 @@
+#ifndef MENU_INCLUDED
+	#define MENU_INCLUDED
+	
 #include<ncurses.h>
 #include<vector>
 #include<string>
@@ -13,3 +16,5 @@ class menu
 		int menu_IO();													//display menu and receive user input;
 																		//return option number selected, index is 1 based
 };
+
+#endif
