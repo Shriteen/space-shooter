@@ -41,11 +41,11 @@ bullet.o: bullet.cpp bullet.h environment.h
 health_pack.o: health_pack.cpp health_pack.h environment.h
 	g++ health_pack.cpp -c
 
-#gameplay.h: environment.h
-#	touch gameplay.h
-
 gameplay.o: gameplay.cpp gameplay.h environment.h
 	g++ gameplay.cpp -c
+
+menu.o: menu.cpp menu.h
+	g++ menu.cpp -c
 
 
 clean:
