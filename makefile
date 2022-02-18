@@ -1,6 +1,5 @@
-#temoprary
-all: sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o
-	g++ sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o -lncurses -o test
+all: sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o menu.o space_shooter.o
+	g++ sprite.o movable.o environment.o ship.o asteroid.o bullet.o health_pack.o gameplay.o menu.o space_shooter.o -lncurses -o space_shooter
 
 sprite.o: sprite.cpp sprite.h
 	g++ sprite.cpp -c
@@ -47,6 +46,11 @@ gameplay.o: gameplay.cpp gameplay.h environment.h
 menu.o: menu.cpp menu.h
 	g++ menu.cpp -c
 
+space_shooter.h: gameplay.h menu.h
+	touch space_shooter.h
+
+space_shooter.o: space_shooter.cpp space_shooter.h
+	g++ space_shooter.cpp -c
 
 clean:
 	rm *.o

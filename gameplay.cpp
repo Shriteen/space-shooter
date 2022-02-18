@@ -8,6 +8,8 @@ gameplay::gameplay(WINDOW *win)
 	this->win=win;
 	canvas=this->win;
 	
+	keypad(this->win,TRUE);
+	
 	//set HUD window
 	this->HUD=newwin(3,COLS,0,0);
 	
@@ -289,34 +291,18 @@ void gameplay::game_loop()
 	state_var=playing;													//Set state to playing
 	while(input()==playing)												//Take input of player, if paused, stop looping and return
 	{
-		this->score++;														//Increment score every tick
+		this->score++;													//Increment score every tick
 		move_env();														//Make all entities move
 		if(interact_env()==0)											//Make all entities interact,
 			return;														//If player did not survive, i.e. game over, then return
 		balance_env();													//Spawn entities if required
 		canvas_draw();													//Draw all game elements
 		HUD_draw();														//Draw HUD
-	}	
+	}
 }
 
 int gameplay::get_score()
 {
 	return score;
 }
-
-/*
-int main()
-{
-	initscr();
-	noecho();
-	start_color();
-	init_pair(1,COLOR_GREEN,COLOR_BLACK);
-	init_pair(2,COLOR_YELLOW,COLOR_BLACK);
-	init_pair(3,COLOR_RED,COLOR_BLACK);
-	keypad(stdscr,TRUE);
-	gameplay g(stdscr);
-	g.game_loop();
-	endwin();
-}
-*/
 
