@@ -16,6 +16,7 @@ class space_shooter
 		void game_main();												//function for an instance of game
 		bool pause_handler();											//handles pause menu, returns false if quit is selected
 		void game_over_handler();										//display game over dialogue
+		bool is_high_score();											//checks if high score and update file
 	public:
 		space_shooter();
 		~space_shooter();

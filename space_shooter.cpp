@@ -1,4 +1,5 @@
 #include "space_shooter.h"
+#include<fstream>
 
 space_shooter::space_shooter():
 				main_menu_win(newwin(0,0,0,0)),
@@ -93,6 +94,7 @@ bool space_shooter::pause_handler()
 
 void space_shooter::game_over_handler()
 {
+	wclear(game_over_dialogue);
 	box(game_over_dialogue,0,0);
 	
 	int h,w;
@@ -107,6 +109,13 @@ void space_shooter::game_over_handler()
 			  (h/2)-1,
 			  (w-9)/2,
 			  "Score:%3d",game->get_score() );
+	if(is_high_score())
+	{
+		mvwprintw(game_over_dialogue,
+				  (h/2),
+				  (w-14)/2,
+				  "New High Score" );
+	}
 	wattroff(game_over_dialogue,A_BOLD);
 	
 	mvwprintw(game_over_dialogue,
@@ -115,6 +124,26 @@ void space_shooter::game_over_handler()
 			  "Press any key to continue..." );
 	wrefresh(game_over_dialogue);
 	wgetch(game_over_dialogue);
+}
+
+bool space_shooter::is_high_score()
+{
+	int hs=0;
+	fstream file("highscore",ios::in|ios::binary);
+	if(file)
+	{
+		file.read((char*)&hs,sizeof(hs));
+		file.close();
+	}
+	if(game->get_score() > hs)
+	{
+		hs=game->get_score();
+		file.open("highscore",ios::out|ios::binary);
+		file.write((char*)&hs,sizeof(hs));
+		file.close();
+		return 1;
+	}
+	return 0;
 }
 
 int main()
