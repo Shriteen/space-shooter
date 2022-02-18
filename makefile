@@ -54,3 +54,6 @@ space_shooter.o: space_shooter.cpp space_shooter.h
 
 clean:
 	rm *.o
+	rm *.gch
+	rm space_shooter
+	rm highscore
