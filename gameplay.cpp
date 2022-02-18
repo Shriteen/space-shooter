@@ -12,41 +12,23 @@ gameplay::gameplay(WINDOW *win)
 	this->HUD=newwin(3,COLS,0,0);
 	
 	this->score=0;
+	
 	//spawn player ship
 	player=new player_ship();
+	
 	//spawn asteroids and add to set
 	for(int i=0; i<TARGET_ASTEROID_COUNT; i++)
 	{
 		asteroid *temp= new asteroid();
 		asteroids.insert(temp);
 	}
+	
 	//spawn enemy ships and add to set
 	for(int i=0; i<TARGET_ENEMY_COUNT; i++)
 	{
 		enemy_ship *temp= new enemy_ship(this->get_level());
 		enemies.insert(temp);
 	}
-	
-	
-	
-	
-	
-/*
-	state_var=playing;
-	while(input()==playing)
-	{
-		
-		move_env();
-		if (interact_env()==0)
-			break;
-		balance_env();
-		canvas_draw();
-		HUD_draw();
-		wrefresh(this->win);
-	}	
-	*/
-	
-	//---------------------------------temporary
 }
 
 gameplay::~gameplay()
@@ -135,10 +117,12 @@ void gameplay::HUD_draw()
 	wclear(this->HUD);
 	box(this->HUD,0,0);
 	//draw health,ammo,speed and score
+	wattron(this->HUD,A_BOLD);
 	mvwprintw(this->HUD,1,1,"Health:%d",player->get_health());
 	mvwprintw(this->HUD,1,int(COLS*0.5),"Ammo:%d",player->get_ammo_quantity());
 	mvwprintw(this->HUD,1,int(COLS*0.25),"Speed:%d",player->get_x_speed());
 	mvwprintw(this->HUD,1,int(COLS*0.75),"Score:%d",this->score);
+	wattroff(this->HUD,A_BOLD);
 	wrefresh(this->HUD);
 }
 
@@ -300,6 +284,25 @@ void gameplay::balance_env()
 	}
 }
 
+void gameplay::game_loop()
+{
+	state_var=playing;													//Set state to playing
+	while(input()==playing)												//Take input of player, if paused, stop looping and return
+	{
+		this->score++;														//Increment score every tick
+		move_env();														//Make all entities move
+		if(interact_env()==0)											//Make all entities interact,
+			return;														//If player did not survive, i.e. game over, then return
+		balance_env();													//Spawn entities if required
+		canvas_draw();													//Draw all game elements
+		HUD_draw();														//Draw HUD
+	}	
+}
+
+int gameplay::get_score()
+{
+	return score;
+}
 
 /*
 int main()
@@ -312,6 +315,8 @@ int main()
 	init_pair(3,COLOR_RED,COLOR_BLACK);
 	keypad(stdscr,TRUE);
 	gameplay g(stdscr);
+	g.game_loop();
 	endwin();
 }
 */
+

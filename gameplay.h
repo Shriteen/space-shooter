@@ -24,9 +24,13 @@ class gameplay
 																	//return 1 if player survives, 0 if game over
 		void balance_env();											//spawn asteroids, enemies and health packs
 	public:
-		gameplay(WINDOW *win);													//spawn player ship, asteroids and enemy ships, set score to 0
+		gameplay(WINDOW *win);										//spawn player ship, asteroids and enemy ships, set score to 0
 		~gameplay();												//frees memory of all entities in game
 		bool is_paused();											//return true if state_var is paused false otherwise
+		int get_score();											//Return score
+		void game_loop();											/* The loop in which game runs;
+																	 * Returns when either paused or game over;
+																	 * After returning check for state to determine pause or over  */
 };
 
 #endif
