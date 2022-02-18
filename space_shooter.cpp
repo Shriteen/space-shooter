@@ -15,6 +15,8 @@ space_shooter::space_shooter():
 				main_menu(main_menu_win,
 						  "Main Menu",
 						  vector<string>{"Start Game",
+										 "High Score",
+										 "Help",
 										 "Exit"}),
 				pause_menu(pause_menu_win,
 						   "Game Paused",
@@ -42,9 +44,15 @@ void space_shooter::start()
 		{
 			case 1:
 				game_main();
-				break;				
+				break;	
+			case 2:
+				show_high_score();
+				break;
+			case 3:
+				help();;
+				break;
 		}
-	}while(ch!=2);
+	}while(ch!=4);
 	
 }
 
@@ -144,6 +152,66 @@ bool space_shooter::is_high_score()
 		return 1;
 	}
 	return 0;
+}
+
+void space_shooter::show_high_score()
+{
+	WINDOW *hs_dialogue=newwin(LINES*0.3,COLS*0.6,LINES*0.35,COLS*0.2);
+	wclear(hs_dialogue);
+	box(hs_dialogue,0,0);
+	
+	int h,w,hs;
+	getmaxyx(hs_dialogue,h,w);
+	
+	fstream file("highscore",ios::in|ios::binary);
+	if(file)
+	{
+		file.read((char*)&hs,sizeof(hs));
+		mvwprintw(hs_dialogue,
+				  (h/2),
+				  (w-14)/2,
+				  "Highscore:%3d",hs );
+		file.close();
+	}
+	else
+	{
+		mvwprintw(hs_dialogue,
+				  (h/2),
+				  (w-20)/2,
+				  "No records found..." );
+	}
+	
+	mvwprintw(hs_dialogue,
+			  h-2,
+			  1,
+			  "Press any key to continue..." );
+	wrefresh(hs_dialogue);
+	wgetch(hs_dialogue);	
+}
+
+void space_shooter::help()
+{
+	WINDOW *helpwin=newwin(0,0,0,0);
+	wclear(helpwin);
+	
+	mvwprintw(helpwin,1,(COLS-4)/2,"Help");
+	
+	mvwprintw(helpwin,3,0,"Space Shooter is an arcade style game \
+where goal is to survive for as much time as possible.\n\n");
+	wprintw(helpwin,"Use up and down arrow keys to move up and down. \
+Left and right arrow keys are used to change speed in left or right direction. \
+Use space to shoot.\n\n");
+	wprintw(helpwin,"The score increases every tick. \
+Hitting asteroid or enemy ships decreases health by 50. \
+Hitting bullet decreases health by 20. \
+Health pickups increase health by 50. \
+When a bullet destroys enemy ship you get 5 ammo. \
+The health of enemies increases with your score.\n\n");
+	wprintw(helpwin,"Press escape to pause game.\n");
+	
+	mvwprintw(helpwin,LINES-1,0,"Press any key to continue...");
+	wrefresh(helpwin);
+	wgetch(helpwin);
 }
 
 int main()
