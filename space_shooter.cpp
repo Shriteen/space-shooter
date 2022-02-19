@@ -205,7 +205,8 @@ Use space to shoot.\n\n");
 Hitting asteroid or enemy ships decreases health by 50. \
 Hitting bullet decreases health by 20. \
 Health pickups increase health by 50. \
-When a bullet destroys enemy ship you get 5 ammo. \
+When a bullet hits enemy ship you get 1 ammo.\
+When a bullet destroys enemy ship you get 25 bonus score. \
 The health of enemies increases with your score.\n\n");
 	wprintw(helpwin,"Press escape to pause game.\n");
 	
