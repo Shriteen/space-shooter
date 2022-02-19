@@ -233,7 +233,7 @@ void enemy_ship::move()
 	}
 }
 
-bool enemy_ship::interact()
+bool enemy_ship::interact(gameplay &g)
 {
 	if(movable::interact() == 0)										//check for map bounds
 		return 0;
@@ -256,8 +256,9 @@ bool enemy_ship::interact()
 		if(this->sprite::touches(**itr))
 		{
 			this->health-=20;
+			player->pick_ammo();
 			if(this->health <= 0)
-				player->pick_ammo();
+				g.increment_score();
 		}
 	}
 	

@@ -2,6 +2,7 @@
 	#define SHIP_INCLUDED
 
 #include "movable.h"
+#include "gameplay.h"
 
 class ship:public movable
 {
@@ -21,7 +22,7 @@ class player_ship:public ship
 	private:
 		static const int MAX_HEALTH=100;								//max health of player
 		static const int INIT_AMMO=15;									//initial ammunition count
-		static const int PICKED_AMMO_AMOUNT=5;							//amount by which to increase ammunition when enemy is shot
+		static const int PICKED_AMMO_AMOUNT=1;							//amount by which to increase ammunition when enemy is hit
 		
 		int ammo;														//amount of ammunition available
 	public:
@@ -46,7 +47,7 @@ class enemy_ship:public ship
 	public:
 		enemy_ship(int level);											//accepts current level for determining health of new enemy ships
 		void move();													//perform random move by enemies
-		bool interact();												//Interact with all other entities, 
+		bool interact(gameplay &g);										//Interact with all other entities, 
 																		//returns true if survived, false if destroyed
 		void draw();													//set player ship color to red
 };

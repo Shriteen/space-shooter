@@ -13,7 +13,7 @@ movable.h: sprite.h
 environment.h: ship.h asteroid.h bullet.h health_pack.h gameplay.h
 	touch environment.h
 
-ship.h: movable.h
+ship.h: movable.h gameplay.h
 	touch ship.h
 
 asteroid.h: movable.h
@@ -54,6 +54,5 @@ space_shooter.o: space_shooter.cpp space_shooter.h
 
 clean:
 	rm *.o
-	rm *.gch
 	rm space_shooter
 	rm highscore

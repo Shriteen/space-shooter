@@ -190,6 +190,11 @@ gameplay::state gameplay::input()
 	return state_var;
 }
 
+void gameplay::increment_score()
+{
+	this->score+=SCORE_INCREMENT;
+}
+
 bool gameplay::interact_env()
 {
 	if(!player->interact())									//if game over
@@ -206,7 +211,7 @@ bool gameplay::interact_env()
 	{
 		set<enemy_ship*>::iterator co_itr=itr;
 		itr++;
-		if(!(*co_itr)->interact())
+		if(!(*co_itr)->interact((*this)))
 		{
 			delete *co_itr;
 			enemies.erase(co_itr);
@@ -277,9 +282,9 @@ void gameplay::balance_env()
 		}
 	}
 	
-	static std::uniform_int_distribution five_percent(0,19);			//0.05 probability for each outcome
-	int chance=five_percent(rand_engine);
-	if(chance == 10)													//0.05 percent probability of truth
+	static std::uniform_int_distribution two_percent(0,49);			//0.02 probability for each outcome
+	int chance=two_percent(rand_engine);
+	if(chance == 25)													//0.02 percent probability of truth
 	{
 		health_pack *temp= new health_pack();
 		hpacks.insert(temp);
