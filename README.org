@@ -1,0 +1,25 @@
+#+TITLE: Space Shooter
+
+A side scrolling shooter in terminal using ncurses
+
+* Play in Terminal!
+The game uses ncurses which presents TUI to user
+
+Select things with arrow keys, no weird I/O
+
+[[file:screenshots/start_screen.png]]
+
+* ASCII art!
+If you like ASCII art this game is for you
+[[file:screenshots/ascii.png]]
+
+* Randomly generated asteroids and ship movements
+Asteroid shape and sizes are randomly generated, so is their movement. Enemy
+ships randomly move in different direction or shoot at you. So it's never
+predictable and boring!
+[[file:screenshots/random.png]]
+
+* Intriguing gameplay with close calls!
+Next enemy move is unpredictable! So keep your guards up! Also watch out for the asteroids!
+Get out of tight situations and see how much you can survive
+[[file:screenshots/gameplay.png]]
